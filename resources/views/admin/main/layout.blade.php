@@ -106,7 +106,7 @@
                              stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                         </svg>
-                        <span class="ml-4">Admin</span>
+                        <span class="ml-4">{{Auth::User()->name}}</span>
                     </a>
                 </li>
 
@@ -338,7 +338,7 @@
                 <ul class="flex items-center flex-shrink-0 space-x-6">
                     <!-- Theme toggler -->
                     <li class="flex">
-                        <span class="me-2">
+                        <span class="me-4 text-amber-950">
                             {{Auth::user()->name}}
                         </span>
                         <button class="rounded-md focus:outline-none focus:shadow-outline-purple" @click="toggleTheme"

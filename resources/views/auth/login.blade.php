@@ -25,15 +25,15 @@
             </button>
             <div class="hidden lg:flex lg:items-center w-full lg:w-auto" id="navbarSupportedContent">
                 <ul class="flex flex-col lg:flex-row lg:ml-auto">
-                    <li class="nav-item">
-                        <a class="block py-2 px-4 text-gray-700 hover:text-blue-500" href="{{ url('/') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="block py-2 px-4 text-gray-700 hover:text-blue-500" href="{{ route('register') }}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="block py-2 px-4 text-gray-700 hover:text-blue-500" href="{{ route('login') }}">Login</a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="block py-2 px-4 text-gray-700 hover:text-blue-500" href="{{ url('/') }}">Home</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="block py-2 px-4 text-gray-700 hover:text-blue-500" href="{{ route('register') }}">Register</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="block py-2 px-4 text-gray-700 hover:text-blue-500" href="{{ route('login') }}">Login</a>--}}
+{{--                    </li>--}}
                 </ul>
             </div>
         </nav>
