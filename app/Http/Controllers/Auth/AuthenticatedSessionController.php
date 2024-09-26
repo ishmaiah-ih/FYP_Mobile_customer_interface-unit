@@ -30,10 +30,10 @@ class AuthenticatedSessionController extends Controller
 
         if($request->user()->role == 'admin'){
 
-            return redirect()->route('admin.index');
+            return redirect()->route('admin.index')->with('status', 'Welcome admin');
         }
 
-        return redirect()->intended(route('user.dashboard'));
+        return redirect()->intended(route('user.dashboard'))->with('status', 'Success: You are logged in!');
     }
 
     /**
@@ -47,6 +47,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('status', 'Success: You are logged out');
     }
 }

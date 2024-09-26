@@ -92,7 +92,7 @@ class DashboardController extends Controller
             ->orderBy('date_generated', 'desc')
             ->get(); // Fetch recent transactions
 
-        return view('admin.billing', compact('invoices', 'transactions'));
+        return view('admin.billing', compact('invoices', 'transactions'))->with('status', 'transaction history deleted successfully');
     }
 
     public function delete_user($id)

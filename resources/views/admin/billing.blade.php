@@ -24,6 +24,12 @@
                     <div class="card-header bg-white border-b border-gray-200 p-4">
                         <h6 class="text-lg font-semibold text-gray-800">Recent Transactions</h6>
                     </div>
+                    @if (session('status'))
+                        <div id="status-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('status') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="card-body p-6">
                         <ul class="list-group">
                             @foreach ($transactions as $transaction)

@@ -74,13 +74,19 @@
     </header>
     <!-- end header section -->
     <!-- slider section -->
+    @if (session('status'))
+        <div id="status-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('status') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <section class=" slider_section ">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 ">
                     <div class="detail_box">
                         <h1>
-                            project-Customer<br>
+                           Customer<br>
                              Interface Unit
                         </h1>
                         <p>
@@ -191,9 +197,18 @@
             </div>
         </div>
     </div>
+
+
+
+
+
 </footer>
 <!-- footer section -->
 
+{{--alerts --}}
+{{--<script src="{{ asset('js/info.js') }}"></script>--}}
+
+@include('partials.alert')
 
 <script src="front/js/jquery-3.4.1.min.js"></script>
 <script src="front/js/bootstrap.js"></script>

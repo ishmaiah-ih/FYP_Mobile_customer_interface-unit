@@ -73,7 +73,7 @@ class FrontController extends Controller
         ]);
 
 // Prepare data to send to ESP32
-        $esp32_url = "192.168.243.123/receive_token"; // Replace with your ESP32 IP address
+        $esp32_url = "http://192.168.149.123/receive_token"; // Replace with your ESP32 IP address
         $response = Http::asForm()->post($esp32_url, [
             'token' => $encryptedToken,
         ]);
@@ -101,7 +101,7 @@ class FrontController extends Controller
     {
         // Ensure the user is authenticated
         if (!Auth::check()) {
-            return redirect()->route('login'); // Redirect to the login page if not authenticated
+            return redirect()->route('login')->with('error', 'You need to be logged in.');
         }
 
         // Fetch user details
@@ -124,7 +124,7 @@ class FrontController extends Controller
     {
         // Ensure the user is authenticated
         if (!Auth::check()) {
-            return redirect()->route('login');
+            return redirect()->route('login')->with('error', 'You need to be logged in.');
         }
 
         // Fetch the authenticated user's ID
@@ -146,4 +146,8 @@ class FrontController extends Controller
         return view('users.profile', compact('user'));
     }
 
+    public function contactUs()
+    {
+      return view('users.contact');
+    }
 }

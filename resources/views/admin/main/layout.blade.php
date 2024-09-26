@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="assets/css/tailwind.output.css"/>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
@@ -25,7 +24,7 @@
     <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="{{route('admin.index')}}">
-               Energy-Top-UP System
+                Energy-Top-UP System
             </a>
             <ul class="mt-6">
                 <li class="relative px-6 py-3">
@@ -322,16 +321,23 @@
                 <!-- Search input -->
                 <div class="flex justify-center flex-1 lg:mr-32">
                     <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
-                        <div class="absolute inset-y-0 flex items-center pl-2">
-                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <input
-                            class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                            type="text" placeholder="Search Here" aria-label="Search"/>
+                        {{--                        <div class="absolute inset-y-0 flex items-center pl-2">--}}
+                        {{--                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">--}}
+                        {{--                                <path fill-rule="evenodd"--}}
+                        {{--                                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"--}}
+                        {{--                                      clip-rule="evenodd"></path>--}}
+                        {{--                            </svg>--}}
+                        {{--                        </div>--}}
+                        {{--                        <input--}}
+                        {{--                            class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"--}}
+                        {{--                            type="text" placeholder="Search Here" aria-label="Search"/>--}}
+                        @if (session('status'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('status') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        @endif
 
                     </div>
                 </div>
@@ -477,11 +483,15 @@
             </div>
         </header>
 
+
         @yield('content')
 
 
     </div>
 </div>
+
+@include('partials.alert');
+
 </body>
 
 </html>

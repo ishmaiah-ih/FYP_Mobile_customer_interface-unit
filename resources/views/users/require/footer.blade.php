@@ -38,5 +38,7 @@
 
 <!-- Bootstrap JS (optional, for some Bootstrap features) -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+@include('partials.alert');
 </body>
 </html>

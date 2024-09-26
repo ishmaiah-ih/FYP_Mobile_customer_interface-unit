@@ -51,15 +51,31 @@
 <br>
 <br>
 
+
 <div class="w-full max-w-md mx-auto mt-6">
     <div class="bg-gray-100 p-8 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-3 text-gray-900 text-center">Sign In</h2>
-        <span>
-        {{-- Messages --}}
-        </span>
+
+        <!-- Status Message -->
+        @if (session('status'))
+            <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 rounded mb-4" role="alert">
+                <p class="text-sm">{{ session('status') }}</p>
+            </div>
+        @endif
+
+        <!-- Validation Error Messages -->
+        @if ($errors->any())
+            <div class="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+                <ul class="list-disc pl-5 space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('login') }}" class="space-y-4" method="POST">
             @csrf
-            {{-- Message --}}
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">
                     Email
@@ -74,7 +90,7 @@
             </div>
             <div>
                 <button type="submit" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
-                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
                 </button>
             </div>
             <div class="text-center">
@@ -83,6 +99,7 @@
         </form>
     </div>
 </div>
+
 
 </body>
 </html>
