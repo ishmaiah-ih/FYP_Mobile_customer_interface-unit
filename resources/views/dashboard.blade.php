@@ -2,14 +2,8 @@
 @include('users.require.navbar')
 
 <body class="bg-white h-screen">
-<!-- Popup message -->
-{{--<div id="welcome-popup"--}}
-{{--     class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-6 p-4 bg-red-500 text-white rounded-md shadow-sm hidden">--}}
-{{--    Welcome to Energy Top-up System <span class="text-green-300 font-bold">{{ $name }}!</span>--}}
-{{--</div>--}}
-<!-- End popup -->
 <div class="container mx-auto py-10">
-{{--   welcome message--}}
+
     @if (session('status'))
         <div id="status-alert" class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('status') }}
@@ -17,23 +11,19 @@
         </div>
     @endif
 
-
-
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- kWh Remaining Display -->
         <div class="bg-white p-6 rounded-lg shadow-sm text-black flex items-center">
             <div class="text-blue-500 text-4xl mr-4">
                 <i class="fas fa-battery-half"></i>
             </div>
             <div>
-                <h2 class="text-dark opacity-7 text-semibold mb-2">Remaining Balance</h2>
-{{--                <p>kWh Consumed: <span id="kwh-consumed">Loading...</span></p>--}}
-                <p>kWh Generated: <span id="kwh-generated">Loading...</span></p>
-                <p>kWh Remaining: <span id="kwh-remaining">Loading...</span></p>
-{{--                <p class="text-sm mb-0 text-uppercase font-weight-bold">{{ $remaining_balance_kwh }} kWh</p>--}}
-{{--                <p class="text-sm mb-0 text-uppercase font-weight-bold"><span id="kwh-value">Loading...</span> kWh</p>--}}
+                <p>kWh Remaining: <span id="kwh-remaining">0</span></p>
+                <p id="warning" class="text-red-500"></p>
             </div>
         </div>
 
+        <!-- Last Transaction Display -->
         <div class="bg-white p-6 rounded-lg shadow-sm text-black flex items-center">
             <div class="text-red-500 text-4xl mr-4">
                 <i class="fas fa-calendar-alt"></i>
@@ -44,6 +34,7 @@
             </div>
         </div>
 
+        <!-- Overall Usage Display -->
         <div class="bg-white p-6 rounded-lg shadow-sm text-black flex items-center">
             <div class="text-yellow-500 text-4xl mr-4">
                 <i class="fas fa-solar-panel"></i>
@@ -54,6 +45,7 @@
             </div>
         </div>
 
+        <!-- Recent Transactions Display -->
         <div class="bg-white p-6 rounded-lg shadow-sm text-black">
             <div class="flex items-center mb-2">
                 <div class="text-purple-500 text-4xl mr-4">
@@ -68,6 +60,7 @@
             </ul>
         </div>
 
+        <!-- Account Status Display -->
         <div class="bg-white p-6 rounded-lg shadow-sm text-black flex items-center">
             <div class="text-yellow-500 text-4xl mr-4">
                 <i class="fas fa-check-circle"></i>
@@ -80,39 +73,33 @@
     </div>
 </div>
 
+<script>
+    // WebSocket connection to ESP32
+    const socket = new WebSocket('ws://192.168.1.171:81');
 
-<script type="module">
-    // Import Firebase functions
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
-
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyDR9RTLdrjqp07u4szkkB7gJXtwwV3CLLE",
-        authDomain: "esp32-7ef3c.firebaseapp.com",
-        databaseURL: "https://esp32-7ef3c-default-rtdb.firebaseio.com",
-        projectId: "esp32-7ef3c",
-        storageBucket: "esp32-7ef3c.appspot.com",
-        messagingSenderId: "370100002558",
-        appId: "1:370100002558:web:fbbc6e44a40222f5398faf"
+    socket.onopen = function(event) {
+        console.log("WebSocket is open now.");
     };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
+    // Handle messages received from ESP32
+    socket.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        document.getElementById('kwh-remaining').innerText = data.kWhRemaining.toFixed(4);
+        if (data.warning) {
+            document.getElementById('warning').innerText = data.warning;
+        } else {
+            document.getElementById('warning').innerText = '';
+        }
+    };
 
-    // Reference to the energyData in the database
-    const energyDataRef = ref(database, 'energyData');
+    socket.onerror = function(event) {
+        console.error("WebSocket error observed:", event);
+    };
 
-    // Display the kWh values and update them in real time
-    onValue(energyDataRef, (snapshot) => {
-        const data = snapshot.val();
-        document.getElementById('kwh-consumed').textContent = data.kWhConsumed || 0;
-        document.getElementById('kwh-generated').textContent = data.kWhGenerated || 0;
-        document.getElementById('kwh-remaining').textContent = data.kWhRemaining || 0;
-    });
+    socket.onclose = function(event) {
+        console.log("WebSocket is closed now.");
+    };
 </script>
 
-
 @include('users.require.footer')
-
+</body>

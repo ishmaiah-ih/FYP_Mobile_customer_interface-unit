@@ -6,11 +6,10 @@
     <div class="col-md-6 mx-auto">
         <div class="w-full ">
             <div class="bg-white p-8 rounded-lg ">
-
                 <h2 class="text-2xl font-bold mb-2 text-gray-900 text-center"><i class="fa fa-fire" aria-hidden="true"></i></h2>
 
                 <!-- Form for Top-Up -->
-                <form action="{{ route('top-up') }}" class="space-y-2" method="POST">
+                <form id="top-up-form" class="space-y-2" method="POST" action="{{ route('top-up') }}">
                     @csrf  <!-- Laravel CSRF token for form security -->
 
                     <input type="hidden" value="{{ Auth::user()->id }}" name="id" />
@@ -55,11 +54,71 @@
                             Top up
                         </button>
                     </div>
-
                 </form>
+
             </div>
         </div>
     </div>
 </div>
 
+<!-- WebSocket integration -->
+
+<script>
+    const ws = new WebSocket('ws://192.168.1.171:81');
+
+    ws.onopen = function () {
+        console.log('Connected to WebSocket server');
+    };
+
+    ws.onclose = function () {
+        console.log('Disconnected from WebSocket server');
+    };
+
+    ws.onerror = function (error) {
+        console.error('WebSocket error:', error);
+    };
+
+    const topUpForm = document.getElementById('top-up-form');
+    topUpForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(topUpForm);
+
+        // Send request to Laravel server for top-up processing
+        fetch(topUpForm.action, {  // Use the action attribute for the URL
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json' // Specify the expected response type
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    // Check for HTTP errors and throw if necessary
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Top-up successful:', data);
+
+                if (data.success) {  // Check if the top-up was successful
+                    // Send the token to the WebSocket server
+                    ws.send(data.token);
+                    console.log('Token sent to ESP32:', data.token);
+                    alert('Top-up successful: ' + data.message);
+                } else {
+                    alert('Top-up failed: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error during top-up:', error);
+                alert('An error occurred during top-up. Please try again.');
+            });
+    });
+</script>
+
+
 @include('users.require.footer')
+

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../styles/styles.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             const popup = document.getElementById('welcome-popup');

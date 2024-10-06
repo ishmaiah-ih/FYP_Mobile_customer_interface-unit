@@ -4,6 +4,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TokenLogic;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -51,3 +52,10 @@ Route::get('/delete_token/{id}', [DashboardController::class, 'delete_token'])->
 //contact admin
 Route::post('/', [ContactController::class, 'store'])->name('contact');
 Route::get('/admin/messages', [ContactController::class, 'show_messages'])->name('contacts.all');
+
+
+//Token Logic
+//
+//Route::post('/top-up', [TokenLogic::class, 'handleTopUp'])->name('top-up');
+//Route::post('/encrypt-token', [TokenLogic::class, 'encryptToken'])->name('encrypt-token');
+Route::post('/top-up', [TokenLogic::class, 'topUp'])->name('top-up')->middleware('auth');;
