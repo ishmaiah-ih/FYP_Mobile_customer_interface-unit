@@ -3,16 +3,16 @@
 
 
 <!-- Script for Mobile Menu -->
-<script>
-    document.getElementById('mobile-menu-button').addEventListener('click', function() {
-        var mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenu.classList.contains('hidden')) {
-            mobileMenu.classList.remove('hidden');
-        } else {
-            mobileMenu.classList.add('hidden');
-        }
-    });
-</script>
+{{--<script>--}}
+{{--    document.getElementById('mobile-menu-button').addEventListener('click', function() {--}}
+{{--        var mobileMenu = document.getElementById('mobile-menu');--}}
+{{--        if (mobileMenu.classList.contains('hidden')) {--}}
+{{--            mobileMenu.classList.remove('hidden');--}}
+{{--        } else {--}}
+{{--            mobileMenu.classList.add('hidden');--}}
+{{--        }--}}
+{{--    });--}}
+{{--</script>--}}
 <footer class="bg-gray-800 py-6 mt-10">
     <div class="container mx-auto text-center">
         <div class="mb-4">
