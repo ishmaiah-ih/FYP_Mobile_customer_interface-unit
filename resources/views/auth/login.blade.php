@@ -53,7 +53,7 @@
 
 
 <div class="w-full max-w-md mx-auto mt-6">
-    <div class="bg-gray-100 p-8 rounded-lg shadow-md">
+    <div class="bg-gray-100 p-8 rounded-lg ">
         <h2 class="text-2xl font-bold mb-3 text-gray-900 text-center">Sign In</h2>
 
         <!-- Status Message -->
