@@ -88,7 +88,7 @@
 
     <!-- Profile Picture Section -->
     <div class="flex justify-center mb-6">
-        <img src="{{ asset('assets/images/prof.jpg') }}" alt="Profile Picture"
+        <img src="{{ asset('images/prof.jpg') }}" alt="Profile Picture"
              class="w-32 h-32 rounded-full object-cover">
     </div>
 
