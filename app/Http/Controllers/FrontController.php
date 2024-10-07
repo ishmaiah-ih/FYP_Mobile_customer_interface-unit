@@ -126,4 +126,8 @@ class FrontController extends Controller
         return view('users.profile', compact('user'));
     }
 
+    public function contactUs()
+    {
+       return view('users.contact');
+    }
 }
