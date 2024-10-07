@@ -103,7 +103,9 @@ class TokenLogic extends Controller
     {
         // ESP32 WebSocket URL
 //        $wsUrl = 'ws://192.168.1.171:81';
-        $wsUrl = 'ws://64.225.27.52:81';
+//        $wsUrl = 'ws://64.225.27.52:81';
+        $wsUrl = 'ws://app.finalyearproject.com:81'; // Replace IP with the domain name
+
         $loop = LoopFactory::create();
         $connector = new Connector($loop);
 
