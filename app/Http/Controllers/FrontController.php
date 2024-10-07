@@ -103,5 +103,18 @@ class FrontController extends Controller
         return view('users.display_token', compact('meterNumber', 'amount', 'kwhGenerated', 'token', 'dateGenerated', 'userDetails'));
     }
 
-// History and other methods remain the same...
+    public function history()
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
+
+        // Fetch the top-up history for the logged-in user, ordered by the most recent transaction
+        $topUpHistory = TopupHistory::where('user_id', $user->id)
+            ->orderBy('date_generated', 'desc') // Order by recent transaction
+            ->get();
+
+        // Pass the history data to the view
+        return view('users.history', compact('topUpHistory'));
+    }
+
 }
