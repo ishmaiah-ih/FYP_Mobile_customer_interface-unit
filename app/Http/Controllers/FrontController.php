@@ -117,4 +117,13 @@ class FrontController extends Controller
         return view('users.history', compact('topUpHistory'));
     }
 
+    public function profile()
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
+
+        // Pass the user data to the profile view
+        return view('users.profile', compact('user'));
+    }
+
 }
