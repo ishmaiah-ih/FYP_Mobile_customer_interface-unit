@@ -55,7 +55,7 @@
             </div>
             <ul class="list-disc pl-5 text-sm mb-0 font-weight-dark">
                 @foreach ($recent_transactions as $transaction)
-                    <li>{{ $transaction->amount }} kWh on {{ $transaction->date_generated }}</li>
+                    <li>{{ $transaction->amount }} kW on {{ $transaction->date_generated }}</li>
                 @endforeach
             </ul>
         </div>

@@ -64,9 +64,9 @@
 <!-- WebSocket integration -->
 
 <script>
-    // const ws = new WebSocket('ws://192.168.1.171:81');
+    const ws = new WebSocket('ws://192.168.1.171:81');
     // const ws = new WebSocket('ws://64.225.27.52:81');  // Update with your public IP and port
-    const ws = new WebSocket('ws://app.finalyearproject.com:81'); // Use your custom domain
+    // const ws = new WebSocket('ws://app.finalyearproject.com:81'); // Use your custom domain
 
     ws.onopen = function () {
         console.log('Connected to WebSocket server');

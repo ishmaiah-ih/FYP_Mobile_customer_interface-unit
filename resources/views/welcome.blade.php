@@ -85,7 +85,7 @@
             <div class="row">
                 <div class="col-md-6 ">
                     <div class="detail_box">
-                        <h1>
+                        <h1> Mobile
                            Customer<br>
                              Interface Unit
                         </h1>
@@ -110,10 +110,10 @@
 
                                         </div>
                                     </div>
+
                                     <div class="carousel-item">
                                         <div class="img-box">
-                                            <img src="front/images/ishmael.jpg" alt="pic">
-
+                                            <img src="front/images/2.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="carousel-item">
